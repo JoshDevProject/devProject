@@ -39,13 +39,13 @@ function handleDatabaseInteraction()
         exit;
     });
     
-    //delete user
+    //handle clicking on the rows/cells in the table
     $("#contactDisplay").delegate("table.userTable td", "click", function(){
+        //delete user
         if ($(this).html() == "X")
         {
             var username = $(this).closest("tr").find("#username").html();
-            var login_id = $(this).closest("tr").find("#login_id").html
-            
+            var login_id = $(this).closest("tr").find("#login_id").html();
             var vUserInfo = {
               "username" : username,
               "login_id" : login_id
@@ -53,6 +53,17 @@ function handleDatabaseInteraction()
             removeUser(vUserInfo);
             displayDatabase();
             exit;
+        }
+        else //edit user
+        {
+            var login_id    = $(this).closest("tr").find("#login_id").html();
+            var username    = $(this).closest("tr").find("#username").html();
+            var password    = $(this).closest("tr").find("#password").html();
+            var firstname   = $(this).closest("tr").find("#firstname").html();
+            var lastname    = $(this).closest("tr").find("#lastname").html();
+            var email       = $(this).closest("tr").find("#email").html();
+            //alert(login_id + " " + username + " " + password + " " + firstname + " " + lastname + " " + email)
+            
         }
     });
 }
@@ -63,6 +74,18 @@ function addUser(vUserInfo)
         'includes/libraries/databaseLibrary.php',
         { processor: 'addUser', userInfo: JSON.stringify(vUserInfo) } ,
         function(){
+        }
+    );
+}
+
+//edits the user
+function editUser(vUserInfo)
+{
+    $.post(
+        'includes/libraries/databaseLibrary.php',
+        { processor: 'editUser', userInfo: JSON.stringify(vUserInfo) },
+        function(){
+            
         }
     );
 }
@@ -92,6 +115,8 @@ function validateUser(vUserInfo)
             $("#permission").html("Access Level: " + access);
     });
 }
+
+
 
 //sets a session variable to a value
 function setSessionVar(vSessionVar)

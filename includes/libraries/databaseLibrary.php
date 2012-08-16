@@ -37,7 +37,7 @@ class DBConfig
     public static $host = 'localhost';
     public static $username = 'josh';
     public static $password = 'password';
-    public static $name = 'login_project';
+    public static $name = 'devproject';
     
     //tables within the database
     public static $tUser = 'users';

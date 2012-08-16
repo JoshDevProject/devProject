@@ -22,6 +22,10 @@
             <?php include "addUser.php" ?>
         </div>
         
+        <div id="editUserWrapper" style="border: 2px solid;">
+            <?php include "editUser.php" ?>
+        </div>
+        
         <div id="contactDisplayWrapper" style="border: 2px solid;">
             <h1>&nbsp&nbsp&nbsp&nbspContacts:</h1>
             <?php include "contactDisplay.php" ?>
