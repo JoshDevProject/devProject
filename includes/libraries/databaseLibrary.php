@@ -12,6 +12,9 @@ if (isset($_POST['processor']))
         case 'addUser':
             DB::addUser();
             break;
+        case 'editUser':
+            DB::editUser();
+            break;
         case 'removeUser':
             DB::removeUser();
             break;
@@ -90,6 +93,28 @@ class DB
             //define access for the new user and insert into the permissions table
             $access = '1';
             DB::queryDB("INSERT into " . DBConfig::$tPermissions . " (login_id,access) VALUES ('$login_id','$access')");
+        }
+    }
+    
+    //edits a user in the database
+    static function editUser()
+    {
+        if (isset($_POST['userInfo']))
+        {
+            //get the user info
+            $userInfo = json_decode($_POST['userInfo']);
+            $login_id = $userInfo->login_id;
+            $firstName = $userInfo->firstName;
+            $lastName = $userInfo->lastName;
+            $email = $userInfo->email;
+            $username = $userInfo->username;
+            $password = $userInfo->password;
+            
+            $result = DB::queryDB(
+                "UPDATE " . DBConfig::$tUser . " " .
+                "SET firstname = '$firstName', lastname = '$lastName', email = '$email', username = '$username', password = '$password'" . 
+                "WHERE login_id = '$login_id'"
+            );
         }
     }
     

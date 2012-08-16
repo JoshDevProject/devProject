@@ -41,7 +41,32 @@
         $("#edit_form").hide();
         $("#editUserStatus").slideUp();
 
+        //submit data if edit user button is pushed
+        $(".editUserBTN").click(function(){
+            //$("edit_form").slideUp();
             
+            var vUserInfo = {
+                "login_id" : $("#login_id_display").html(),
+                "firstName" : $("#firstnameEdit").val(),
+                "lastName" : $("#lastnameEdit").val(),
+                "email" : $("#emailEdit").val(),
+                "username" : $("#usernameEdit").val(),
+                "password" : $("#passwordEdit").val()
+            };
+            
+            editUser(vUserInfo);
+            
+            //refresh the display
+            displayDatabase();
+            
+            //then hide the form
+            $("#edit_form").slideUp();
+        });
+
+        //hide the form if cancel button is clicked    
+        $(".cancelEditBTN").click(function(){
+            $("#edit_form").slideUp();
+        });
     });  
     
 </script>

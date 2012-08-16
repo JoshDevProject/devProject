@@ -56,14 +56,24 @@ function handleDatabaseInteraction()
         }
         else //edit user
         {
-            var login_id    = $(this).closest("tr").find("#login_id").html();
-            var username    = $(this).closest("tr").find("#username").html();
+            //get the data about the user clicked
+            login_id        = $(this).closest("tr").find("#login_id").html();
+            username        = $(this).closest("tr").find("#username").html();
             var password    = $(this).closest("tr").find("#password").html();
             var firstname   = $(this).closest("tr").find("#firstname").html();
             var lastname    = $(this).closest("tr").find("#lastname").html();
             var email       = $(this).closest("tr").find("#email").html();
-            //alert(login_id + " " + username + " " + password + " " + firstname + " " + lastname + " " + email)
             
+            //set the data in the form
+            $("#login_id_display").html(login_id);
+            $("#usernameEdit").val(username);
+            $("#passwordEdit").val(password);
+            $("#firstnameEdit").val(firstname);
+            $("#lastnameEdit").val(lastname);
+            $("#emailEdit").val(email);
+            
+            //display the form
+            $("#edit_form").slideDown();
         }
     });
 }
@@ -85,7 +95,6 @@ function editUser(vUserInfo)
         'includes/libraries/databaseLibrary.php',
         { processor: 'editUser', userInfo: JSON.stringify(vUserInfo) },
         function(){
-            
         }
     );
 }
