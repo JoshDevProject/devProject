@@ -43,7 +43,6 @@
 
         //submit data if edit user button is pushed
         $(".editUserBTN").click(function(){
-            //$("edit_form").slideUp();
             
             var vUserInfo = {
                 "login_id" : $("#login_id_display").html(),
