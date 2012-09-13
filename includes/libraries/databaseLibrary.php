@@ -152,10 +152,11 @@ class DB
         {
             //get the user info
             $userInfo = json_decode($_POST['userInfo']);
-            if (isset($userInfo->username))
-                $username = $userInfo->username;    
-            if (isset($userInfo->password))
+            if (isset($userInfo->username)  && isset($userInfo->password))
+            {
+                $username = $userInfo->username;
                 $password = $userInfo->password;
+            }
             
             //check if the user exists
             $query = "SELECT * FROM " . DBConfig::$tUser . " where username='$username' and password='$password'";
@@ -173,21 +174,22 @@ class DB
                 if ($result)
                 {
                     $info = mysqli_fetch_assoc($result);
-                    $access = $info['access'];
-                    $_SESSION['access'] == $access;
-                    echo $access;
+                    //$access = $info['access'];
+                    $_SESSION['access'] = $info['access'];
+                    //$_SESSION['access'] == $access;
+                    echo $_SESSION['access'];
                 }
                 else 
                 {
                     $_SESSION['access'] = 0;
-                    echo "0";
+                    echo $_SESSION['access'];
                 }
             }
             //if they arent, return access level 0
             else 
             {
                 $_SESSION['access'] = 0;
-                echo "0";
+                echo $_SESSION['access'];
             }
         }
     }
@@ -223,16 +225,22 @@ class DB
                 //if already sorted by the category
                 if ($_SESSION['sortBy'] == $displayConfig->sortBy)
                 {
+                    //toggle isReversed
                     if ($_SESSION['isReversed'] == 0)
                         $_SESSION['isReversed'] = 1;
                     else
                         $_SESSION['isReversed'] = 0;
                 }
                 else
+                {
                     $_SESSION['sortBy'] = $displayConfig->sortBy;
+                    
+                    //reset isReversed
+                    $_SESSION['isReversed'] = 0;
+                }
             }
             if (isset($displayConfig->reversed))
-                $_SESSION['isReversed'] = $displayConfig->sortBy;
+                $_SESSION['isReversed'] = $displayConfig->isReversed;
             if (isset($displayConfig->contactsToShow))
                 $_SESSION['contactsToShow'] = $displayConfig->contactsToShow;
         }

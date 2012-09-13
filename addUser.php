@@ -21,7 +21,6 @@
 
 <div class="addUser_wrapper">
     <form id="add_form" method="post">
-
         <label>Username: </label><input id="usernameAdd" type="text">
         <label>Password: </label><input id="passwordAdd" type="text">
         <label>First Name: </label><input id="firstnameAdd" type="text">
@@ -32,8 +31,7 @@
     <input type="button" class="addUserBTN" value="Add User">
 </div>
 
-<script>
-    
+<script>    
     $(document).ready(function(){
         //initially hide the add user form and add user status
         $("#add_form").hide();
@@ -48,7 +46,7 @@
                 var lastname = $("#lastnameAdd").val();
                 var email = $("#emailAdd").val();
                 var username = $("#usernameAdd").val();
-                var password = $("#passwordAdd").val();                
+                var password = $("#passwordAdd").val();
                 
                 //add to database
                 var vUserInfo = {
@@ -81,7 +79,7 @@
                 
                 //remove addingUser class
                 $("#add_form").removeClass("addingUser");
-            }   
+            }
             else //we need to dropdown the form so a user can be added
             {
                 //drop the form and add a class designating we are adding a user now
@@ -90,6 +88,5 @@
             }
             
         });
-    });     
-    
+    });
 </script>

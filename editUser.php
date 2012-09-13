@@ -19,6 +19,8 @@
 
 <div id="editUserStatus"></div>
 
+
+
 <div class="editUser_wrapper">
     <form id="edit_form" method="post">
         <label>Login_ID: </label><div id="login_id_display"></div>
